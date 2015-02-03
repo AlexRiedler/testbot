@@ -94,5 +94,5 @@ get '/status' do
 end
 
 get '/status/:dir/:file' do
-  File.read(File.join(File.dirname(__FILE__), "/status/#{params[:dir]}/#{params[:file]}"))
+  send_file File.read(File.join(File.dirname(__FILE__), "/status/#{params[:dir]}/#{params[:file]}"))
 end

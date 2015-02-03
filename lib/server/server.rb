@@ -11,9 +11,10 @@ require File.expand_path(File.join(File.dirname(__FILE__), 'build.rb'))
 
 require 'sinatra/base'
 
-module Testbot
+module Testbot::Server
   class Server < Sinatra::Base
 
+    set :root, File.dirname(__FILE__)
     set :show_exceptions, true
 
     if ENV['INTEGRATION_TEST']
@@ -22,10 +23,8 @@ module Testbot
       set :port, Testbot::SERVER_PORT
     end
 
-    class Server
-      def self.valid_version?(runner_version)
-        Testbot.version == runner_version
-      end
+    def self.valid_version?(runner_version)
+      Testbot.version == runner_version
     end
 
     post '/builds' do

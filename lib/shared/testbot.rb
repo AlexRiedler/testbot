@@ -96,11 +96,11 @@ module Testbot
       require File.expand_path(File.join(File.dirname(__FILE__), '/../server/server'))
 
       if type == 'run'
-        run Server
+        Server::Server.run!
       else
         puts "Testbot server started (pid: #{Process.pid})"
         SimpleDaemonize.start(lambda {
-          run Server
+          Server::Server.run!
         }, Testbot::SERVER_PID, "testbot (server)")
       end
     end

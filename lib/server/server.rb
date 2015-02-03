@@ -9,6 +9,8 @@ require File.expand_path(File.join(File.dirname(__FILE__), 'group.rb'))
 require File.expand_path(File.join(File.dirname(__FILE__), 'runner.rb'))
 require File.expand_path(File.join(File.dirname(__FILE__), 'build.rb'))
 
+set :show_exceptions, true
+
 if ENV['INTEGRATION_TEST']
   set :port, 22880
 else

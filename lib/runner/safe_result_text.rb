@@ -1,5 +1,3 @@
-require 'iconv'
-
 module Testbot::Runner
   class SafeResultText
     def self.clean(text)

@@ -41,7 +41,7 @@ module Testbot
         start_runner(opts)
       elsif opts[:runner] == 'stop'
         stop('runner', Testbot::RUNNER_PID)
-      elsif adapter = Adapter.all.find { |adapter| opts[adapter.type.to_sym] }
+      elsif adapter = Adapter.all.find { |a| opts[a.type.to_sym] }
         require File.expand_path(File.join(File.dirname(__FILE__), '/../requester/requester'))
         start_requester(opts, adapter)
       end
@@ -96,11 +96,11 @@ module Testbot
       require File.expand_path(File.join(File.dirname(__FILE__), '/../server/server'))
 
       if type == 'run'
-        Sinatra::Application.run! :environment => "production"
+        run Server
       else
         puts "Testbot server started (pid: #{Process.pid})"
         SimpleDaemonize.start(lambda {
-          Sinatra::Application.run! :environment => "production"
+          run Server
         }, Testbot::SERVER_PID, "testbot (server)")
       end
     end
